@@ -1,5 +1,5 @@
 #include <msp430.h>
-#include "timerLib/libTimer.h"
+#include "../timerLib/libTimer.h"
 #include "buzzer.h"
 #include "stateMachines.h"
 

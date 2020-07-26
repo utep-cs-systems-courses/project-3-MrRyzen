@@ -25,7 +25,7 @@ void main(void) {
   p2sw_init(15);
   or_sr(0x8); // GIE (enable interrupts)
   
-  //lab 2
+  /* lab 2
   switch_init();
   led_init();
   buzzer_init();
@@ -33,5 +33,5 @@ void main(void) {
 
   state_init();
   
-  or_sr(0x18);
+  or_sr(0x18);*/
 } 

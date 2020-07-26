@@ -3,7 +3,6 @@
 #include "switches.h"
 #include "led.h"
 #include "buzzer.h"
-#include "timerLib/libTimer.h"
 
 unsigned char toggle_led;
 //Dim variable higher = lower brightness
