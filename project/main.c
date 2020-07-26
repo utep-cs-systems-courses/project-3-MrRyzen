@@ -13,14 +13,13 @@ void main(void) {
   u_char width = screenWidth, height = screenHeight;
 
   clearScreen(COLOR_BLUE);
-  clearScreen(COLOR_NAVY);
 
-  drawString5x7(20,20, "hello", COLOR_GREEN, COLOR_RED);
-  drawString8x12 (10,10,"Howdy", COLOR_WHITE, COLOR_SKY_BLUE);
+  drawString8x12 (16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
+  drawString8x12 (28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
   
-  for (int col = 0; col < 20; col++) {
-    for (int row = 0; row < col; row++) {
-      void drawPixel(col, row, COLOR_ORANGE);
+  for (int row = 1; row < 51; row++) {
+    for (int col = 1; col < (row+(row-1)); col++) {
+      drawPixel((col+15)+(50-row), row+35, COLOR_ORANGE);
     }
   }
 
