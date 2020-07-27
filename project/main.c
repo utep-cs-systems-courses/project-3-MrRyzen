@@ -31,7 +31,7 @@ void main(void) {
 
   for(;;){
     while(!redrawScreen){
-      P1OUT &= ~LED_RED;
+      P1OUT |= LED_RED;
       or_sr(0x10);
     }
     P1OUT |= LED_GREEN;
