@@ -10,6 +10,7 @@ static char dim = 0;
 //Intializes state machine and variables
 void state_init() {
   state = 0;
+  redrawScreen = 0;
   toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;
   led_update();
 }
