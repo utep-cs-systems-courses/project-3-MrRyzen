@@ -7,6 +7,8 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
+unsigned char redrawScreen;
+
 void main(void) {
   u_char width = screenWidth, height = screenHeight;
 
