@@ -33,10 +33,15 @@ void main(void) {
   state_init();
 
   enableWDTInterrupts();
+
   or_sr(0x8);
 
   drawInit();
   redrawLCD();
+
+  toggle_led = LED_GREEN;
+  led_update();
+  
   for(;;){
     while(!redrawScreen){
       toggle_led = LED_RED;
