@@ -41,7 +41,7 @@ void main(void) {
       P1OUT &= ~LED_RED;
       or_sr(0x10);
     }
-    P1OUT |= LED_RED;
+    P1OUT |= LED_GREEN;
     redrawScreen = 0;
 
     redrawLCD();
