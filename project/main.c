@@ -7,7 +7,8 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
-unsigned char redrawScreen, toggle_led;
+unsigned char redrawScreen = 1;
+unsigned char toggle_led;
 
 void drawInit() {
   clearScreen(COLOR_BLUE);
@@ -21,7 +22,7 @@ void lcdRedraw() {
   drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
 }
 
-void main(void) {
+void main() {
   configureClocks();
   //lcd init
   lcd_init();
@@ -36,8 +37,9 @@ void main(void) {
   or_sr(0x8);
 
   drawInit();
-
-  for(;;){
+  
+  while(1){
+    //clearScreen(COLOR_ORANGE);
     while(!redrawScreen){
       toggle_led = LED_RED;
       led_update();
@@ -46,7 +48,7 @@ void main(void) {
     toggle_led = LED_GREEN;
     led_update();
     
-    lcdRedraw();
+    clearScreen(COLOR_ORANGE);
     redrawScreen = 0;
   }
 }

@@ -1,5 +1,7 @@
 #include <msp430.h>
 #include <libTimer.h>
+#include <lcdutils.h>
+#include <lcddraw.h>
 #include "stateMachines.h"
 #include "switches.h"
 #include "led.h"
@@ -11,7 +13,7 @@ static char dim = 0;
 //Intializes state machine and variables
 void state_init() {
   state = 0;
-  redrawScreen = 0;
+  redrawScreen = 1;
   //toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;
   led_update();
 }
@@ -36,6 +38,8 @@ void state_advance() {
   switch (state) {
   case 1:               /* Case 1 set green led and plays beep when sw1 & sw3 are down moves case */
     //toggle_led = LED_GREEN;
+    clearScreen(COLOR_RED);
+    redrawScreen = 1;
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
@@ -66,8 +70,9 @@ void state_advance() {
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
     if(sw1_state_down) {
       state = 1;
+      clearScreen(COLOR_ORANGE);
+      __delay_cycles(20000);
       redrawScreen = 1;
-      and_sr(0xffef);
       play_beep();
     }
     //toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;//Toggles leds
