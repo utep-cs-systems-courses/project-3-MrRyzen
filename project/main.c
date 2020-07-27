@@ -17,6 +17,7 @@ void drawInit() {
 }
 
 void redrawLCD() {
+  and_sr(~8);
   u_char width = screenWidth, height = screenHeight;
   drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
 }
@@ -42,7 +43,6 @@ void main(void) {
       led_update();
       or_sr(0x10);
     }
-    and_sr(0xffef);
     toggle_led = LED_GREEN;
     led_update();
     redrawScreen = 0;
