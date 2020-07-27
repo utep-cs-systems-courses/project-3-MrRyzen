@@ -45,8 +45,8 @@ void fillRectangle(u_char colMin, u_char rowMin, u_char width, u_char height,
  *  \param colorBGR Color of triangle
  */
 void drawTriangle(u_char colMin, u_char rowMin, u_char height, u_int colorBGR) {
-  for (int col = 1; col < height+1; col++) {
-    for (int row = 1; row < (col+(col-1)); row++) {
+  for (int row = 1; row < height+1; row++) {
+    for (int col = 1; col < (row+(row-1)); col++) {
       drawPixel((col+colMin)+(height-row), row+rowMin, colorBGR);
     }
   }

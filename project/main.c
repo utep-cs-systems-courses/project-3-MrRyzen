@@ -17,7 +17,7 @@ void main(void) {
   drawString8x12 (16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
   drawString8x12 (28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
 
-  drawTriangle(width/2, height/2, 20, COLOR_ORANGE);
+  drawTriangle((width/2)-20, height/2, 20, COLOR_ORANGE);
 
   /* lab 2
   switch_init();
