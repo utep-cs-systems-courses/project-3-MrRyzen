@@ -38,9 +38,6 @@ void main(void) {
 
   drawInit();
 
-  toggle_led = LED_GREEN;
-  led_update();
-
   for(;;){
     while(!redrawScreen){
       toggle_led = LED_RED;
