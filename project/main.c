@@ -36,7 +36,7 @@ void main(void) {
   or_sr(0x8);
 
   drawInit();
-
+  redrawLCD();
   for(;;){
     while(!redrawScreen){
       toggle_led = LED_RED;
