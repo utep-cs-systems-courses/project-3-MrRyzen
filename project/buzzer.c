@@ -38,7 +38,7 @@ void play_beep() {
 //Method to play a song
 void play_song() {
   short A2 = 233.08;	/* notes for the song */
-  short B2 =246.94;
+  short B2 = 246.94;
   short A = 440.00;
   short D = 293.66;
   short F = 349.23;
