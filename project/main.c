@@ -7,7 +7,7 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
-unsigned char redrawScreen;
+unsigned char redrawScreen, toggle_led;
 
 void drawInit() {
   clearScreen(COLOR_BLUE);
@@ -38,10 +38,12 @@ void main(void) {
 
   for(;;){
     while(!redrawScreen){
-      P1OUT &= ~LED_RED;
+      toggle_led = LED_RED;
+      led_update();
       or_sr(0x10);
     }
-    P1OUT |= LED_GREEN;
+    toggle_led = LED_GREEN;
+    led_update();
     redrawScreen = 0;
 
     redrawLCD();

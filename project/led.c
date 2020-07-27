@@ -3,8 +3,6 @@
 #include "switches.h"
 #include "stateMachines.h"
 
-unsigned char state;
-
 void led_init()
 {
   P1DIR |= LEDS;		// bits attached to leds are output
