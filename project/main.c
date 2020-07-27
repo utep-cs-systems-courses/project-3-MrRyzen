@@ -9,9 +9,19 @@
 
 unsigned char redrawScreen;
 
-void main(void) {
-  u_char width = screenWidth, height = screenHeight;
+void drawInit() {
+  clearScreen(COLOR_BLUE);
 
+  drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
+  drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
+}
+
+void redrawLCD() {
+  u_char width = screenWidth, height = screenHeight;
+  drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
+}
+
+void main(void) {
   configureClocks();
   //lcd init
   lcd_init();
@@ -36,15 +46,4 @@ void main(void) {
 
     redrawLCD();
   }
-}
-
-void drawInit() {
-    clearScreen(COLOR_BLUE);
-
-    drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
-    drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
-}
-
-void redrawLCD() {
-    drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
 }
