@@ -1,4 +1,5 @@
 #include <msp430.h>
+#include <libTimer.h>
 #include "stateMachines.h"
 #include "switches.h"
 #include "led.h"
