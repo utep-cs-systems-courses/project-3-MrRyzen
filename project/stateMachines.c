@@ -11,7 +11,7 @@ static char dim = 0;
 void state_init() {
   state = 0;
   redrawScreen = 1;
-  toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;
+  //toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;
   led_update();
 }
 //Method resets state machine and variables back to start
