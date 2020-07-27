@@ -2,7 +2,7 @@
 #define stateMachine_included
 //state variable
 extern unsigned char state;
-extern char redrawScreen;
+extern unsigned char redrawScreen;
 
 void state_init();
 void state_advance();

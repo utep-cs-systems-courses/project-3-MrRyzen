@@ -7,7 +7,7 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
-char redrawScreen;
+unsigned char redrawScreen;
 
 void main(void) {
   u_char width = screenWidth, height = screenHeight;
@@ -24,19 +24,27 @@ void main(void) {
   enableWDTInterrupts();
   or_sr(0x8);
 
-  clearScreen(COLOR_BLUE);
-
-  drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
-  drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
+  drawInit();
 
   for(;;){
     while(!redrawScreen){
-      P1OUT |= LED_RED;
+      P1OUT &= ~LED_RED;
       or_sr(0x10);
     }
-    P1OUT |= LED_GREEN;
+    P1OUT |= LED_RED;
     redrawScreen = 0;
 
-    drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
+    redrawLCD();
   }
+}
+
+void drawInit() {
+    clearScreen(COLOR_BLUE);
+
+    drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
+    drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
+}
+
+void redrawLCD() {
+    drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
 }

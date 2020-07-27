@@ -64,11 +64,11 @@ void state_advance() {
     break;
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
     if(sw1_state_down) {
-      redrawScreen = 1;
       state = 1;
+      redrawScreen = 1;
       play_beep();
     }
-    //toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;//Toggles leds
+    toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;//Toggles leds
     break;
   default: break;
   }
