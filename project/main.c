@@ -17,7 +17,6 @@ void drawInit() {
 }
 
 void redrawLCD() {
-  and_sr(~8);
   u_char width = screenWidth, height = screenHeight;
   drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
 }
