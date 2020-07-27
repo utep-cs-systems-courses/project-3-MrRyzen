@@ -66,6 +66,7 @@ void state_advance() {
     if(sw1_state_down) {
       state = 1;
       redrawScreen = 1;
+      and_sr(~0x10);
       play_beep();
     }
     //toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;//Toggles leds
