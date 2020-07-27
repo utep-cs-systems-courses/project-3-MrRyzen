@@ -37,6 +37,21 @@ void fillRectangle(u_char colMin, u_char rowMin, u_char width, u_char height,
   }
 }
 
+/** Fill triangle
+ *
+ *  \param colMin Column start
+ *  \param rowMin Row start
+ *  \param height height of triangle
+ *  \param colorBGR Color of triangle
+ */
+void drawTriangle(u_char colMin, u_char rowMin, u_char height, u_int colorBGR) {
+  for (int col = 1; col < height+1; col++) {
+    for (int row = 1; row < (col+(col-1)); row++) {
+      drawPixel((col+colMin)+(height-row), row+rowMin, colorBGR);
+    }
+  }
+}
+
 /** Clear screen (fill with color)
  *  
  *  \param colorBGR The color to fill screen

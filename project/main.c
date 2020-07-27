@@ -16,12 +16,8 @@ void main(void) {
 
   drawString8x12 (16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
   drawString8x12 (28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
-  
-  for (int row = 1; row < 51; row++) {
-    for (int col = 1; col < (row+(row-1)); col++) {
-      drawPixel((col+15)+(50-row), row+35, COLOR_ORANGE);
-    }
-  }
+
+  drawTriangle(width/2, height/2, 20, COLOR_ORANGE);
 
   /* lab 2
   switch_init();
