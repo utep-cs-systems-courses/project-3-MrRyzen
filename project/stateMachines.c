@@ -13,7 +13,7 @@ static char dim = 0;
 //Intializes state machine and variables
 void state_init() {
   state = 0;
-  redrawScreen = 1;
+  redrawScr = 1;
   //toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;
   led_update();
 }
@@ -71,8 +71,7 @@ void state_advance() {
     if(sw1_state_down) {
       state = 1;
       clearScreen(COLOR_ORANGE);
-      __delay_cycles(20000);
-      redrawScreen = 1;
+      redrawScr = 1;
       play_beep();
     }
     //toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;//Toggles leds

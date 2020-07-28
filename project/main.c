@@ -7,7 +7,7 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
-unsigned char redrawScreen = 1;
+unsigned char redrawScr = 1;
 unsigned char toggle_led;
 
 void drawInit() {
@@ -34,7 +34,19 @@ void main() {
 
   enableWDTInterrupts();
 
-  or_sr(0x18);
-
   drawInit();
+
+  or_sr(0x8);
+
+  while(1){
+    while(!redrawScr){
+      toggle_led = LED_RED;
+      led_update();
+      or_sr(0x10);
+    }
+    toggle_led = LED_GREEN;
+    led_update();
+    redrawScr = 0;
+    redrawLCD();
+  }
 }
