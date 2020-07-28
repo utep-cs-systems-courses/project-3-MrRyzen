@@ -7,22 +7,11 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
-unsigned char redrawScr = 1;
 unsigned char toggle_led;
 
-void drawInit() {
-  clearScreen(COLOR_BLUE);
-
-  drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
-  drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
-}
-
-void lcdRedraw() {
-  u_char width = screenWidth, height = screenHeight;
-  drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
-}
-
 void main() {
+  u_char width = screenWidth, height = screenHeight;
+  
   configureClocks();
   //lcd init
   lcd_init();
@@ -34,19 +23,15 @@ void main() {
 
   enableWDTInterrupts();
 
-  drawInit();
+  clearScreen(COLOR_BLUE);
 
-  or_sr(0x8);
+  drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
+  drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
 
-  while(1){
-    while(!redrawScr){
-      toggle_led = LED_RED;
-      led_update();
-      or_sr(0x10);
-    }
-    toggle_led = LED_GREEN;
-    led_update();
-    redrawScr = 0;
-    lcdRedraw();
-  }
+  drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
+
+  toggle_led = LED_RED;//led off
+  led_update();
+
+  or_sr(0x18);
 }
