@@ -30,18 +30,18 @@ void drawState() {
   drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
   
   switch (state) {
-    case 1:
-      drawTriangle((width/2)-36, height/2, 30, COLOR_GREEN);
-      break;
-    case 2:
-      drawTriangle((width/2)-36, height/2, 26, COLOR_GREEN);
-      break;
-    case 3:
-      drawTriangle((width/2)-36, height/2, 12, COLOR_GREEN);
-      break;
-    case 4:
-      drawTriangle((width/2)-36, height/2, 6, COLOR_RED);
-      break;
+  case 1:
+    drawTriangle((width/2)-36, height/2, 30, COLOR_GREEN);
+    break;
+  case 2:
+    drawTriangle((width/2)-36, height/2, 26, COLOR_GREEN);
+    break;
+  case 3:
+    drawTriangle((width/2)-36, height/2, 12, COLOR_GREEN);
+    break;
+  case 4:
+    drawTriangle((width/2)-36, height/2, 6, COLOR_RED);
+    break;
   }
   or_sr(0x10);
 }
@@ -60,16 +60,16 @@ void state_advance() {
   case 1:               /* Case 1 set green led and plays beep when sw1 & sw3 are down moves case */
     toggle_led &= ~LED_GREEN;
     if(sw1_state_down && sw3_state_down) {
-      drawState();
       state = 2;
       play_beep();
+      drawState();
     }
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
     toggle_led &= ~LED_GREEN;
     if(sw2_state_down && sw3_state_down) {
-      drawState();
       state = 3;
+      drawState();
     }
     break;
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
@@ -80,21 +80,21 @@ void state_advance() {
       toggle_led = 0;
     //wating for next case
     if(sw1_state_down && sw2_state_down && sw3_state_down) {
-      drawState();
       state = 4;
       play_beep();
+      drawState();
     }
     break;
   case 4:               /* Last case or "win case" sets state to zero to start over and then plays song because you won */
     state = 0;
-    drawState();
     play_song();//Song player
+    drawState();
     break;
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
     if(sw1_state_down) {
       state = 1;
-      drawState();
       play_beep();
+      drawState();
     }
     toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;
     break;
