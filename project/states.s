@@ -20,10 +20,10 @@ dimmerControl:
 	CMP.B #4, R12
 	JNE zero
 	MOV.B #1, R12
-	JMP one
+	JMP return
 zero:
 	MOV.B #0, R12
-one:
+return:
 	RET
 
 	.global stateToString

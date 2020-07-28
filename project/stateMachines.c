@@ -92,7 +92,7 @@ void state_advance() {
 
   switch (state) {
   case 1:               /* Case 1 set green led and plays beep when sw1 & sw3 are down moves case */
-    P1OUT |= LED_GREEN;
+    toggle_led |= LED_GREEN;
     //Led dimmer logic
     if(dimmerControl(dim)){
       toggle_led = LED_RED;
@@ -110,7 +110,7 @@ void state_advance() {
     }
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
-    P1OUT |= LED_GREEN;
+    toggle_led |= LED_GREEN;
     if(dimmerControl(dim)){
       toggle_led = LED_RED;
       dim = 0;
@@ -126,7 +126,7 @@ void state_advance() {
     }
     break;
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
-    P1OUT |= LED_GREEN;
+    toggle_led |= LED_GREEN;
     //Led dimmer logic
     if(dimmerControl(dim)){
       toggle_led = LED_RED;
@@ -145,18 +145,19 @@ void state_advance() {
     }
     break;
   case 4:               /* Last case or "win case" sets state to zero to start over and then plays song because you won */
-    P1OUT |= LED_GREEN;
+    toggle_led |= LED_GREEN;
     state = 0;
     play_song();//Song player
     writeState(stateToString(state));
     drawState();
     break;
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
-    P1OUT |= LED_GREEN;
+    toggle_led |= LED_GREEN;
     if(sw1_state_down) {
       state = 1;
       writeState(stateToString(state));
       play_beep();
+      drawState();
     }
     break;
   default: break;
