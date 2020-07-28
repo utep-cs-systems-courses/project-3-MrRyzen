@@ -11,19 +11,11 @@ dimmerControl:
     AND     #0xff, R12
     MOV.B   R12, &dim
     MOV.B   &dim, R12
-    MOV.B   #4, R13
-    CMP.B   R12, R13 { JLO        .L2
-    MOV.B   &dim, R12
-    BR      #.L3
-.L2:
-    MOV.B   #0, R12
-.L3:
-    MOV.B   R12, &dim
-    MOV.B   &dim, R12
-    CMP.W   #0, R12 { JNE .L4
+    CMP.B   #4, R12
+    JNE zero
     MOV.B   #1, R12
-    BR      #.L5
-.L4:
+    JMP one
+zero:
     MOV.B   #0, R12
-.L5:
+one:
     RET

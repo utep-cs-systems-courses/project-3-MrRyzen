@@ -21,11 +21,7 @@ void reset_states() {
   toggle_led = 0;
   buzzer_set_period(0);
   led_update();
-}
-
-void cpuOFF() {
-  or_sr(0x18);
-}
+}-     
 
 void drawState() {
   u_char width = screenWidth, height = screenHeight;
@@ -57,12 +53,10 @@ void drawState() {
 
 /*void dimmerControl() {
   dim++;
-  dim = (dim > 4) ? 0 : dim;
-  //Led dimmer logic
-  if (dim == 0)
-    toggle_led = LED_RED;
+  if (dim == 4)
+    return 1;
   else
-    toggle_led = 0;
+    return 0;
 }*/
 
 void state_advance() {
