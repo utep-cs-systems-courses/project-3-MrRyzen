@@ -38,8 +38,8 @@ void state_advance() {
   switch (state) {
   case 1:               /* Case 1 set green led and plays beep when sw1 & sw3 are down moves case */
     //toggle_led = LED_GREEN;
-    clearScreen(COLOR_RED);
-    redrawScreen = 1;
+    //clearScreen(COLOR_RED);
+    redrawScr = 1;
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
@@ -70,7 +70,7 @@ void state_advance() {
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
     if(sw1_state_down) {
       state = 1;
-      clearScreen(COLOR_ORANGE);
+      //clearScreen(COLOR_ORANGE);
       redrawScr = 1;
       play_beep();
     }

@@ -47,6 +47,6 @@ void main() {
     toggle_led = LED_GREEN;
     led_update();
     redrawScr = 0;
-    redrawLCD();
+    lcdRedraw();
   }
 }
