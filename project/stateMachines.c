@@ -70,8 +70,12 @@ void state_advance() {
   case 1:               /* Case 1 set green led and plays beep when sw1 & sw3 are down moves case */
     P1OUT |= LED_GREEN;
     //Led dimmer logic
-    if(dimmerControl())
+    if(dimmerControl(dim)){
       toggle_led = LED_RED;
+      dim = 0;
+    }
+    else
+      dim++;
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
@@ -80,8 +84,12 @@ void state_advance() {
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
     P1OUT |= LED_GREEN;
-    if(dimmerControl())
+    if(dimmerControl(dim)){
       toggle_led = LED_RED;
+      dim = 0;
+    }
+    else
+      dim++;
     if(sw2_state_down && sw3_state_down) {
       state = 3;
       drawState();
@@ -90,8 +98,12 @@ void state_advance() {
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
     P1OUT |= LED_GREEN;
     //Led dimmer logic
-    if(dimmerControl())
+    if(dimmerControl(dim)){
       toggle_led = LED_RED;
+      dim = 0;
+    }
+    else
+      dim++;
     //wating for next case
     if(sw1_state_down && sw2_state_down && sw3_state_down) {
       state = 4;
@@ -110,8 +122,6 @@ void state_advance() {
     if(sw1_state_down) {
       state = 1;
       play_beep();
-      if(dimmerControl())
-        toggle_led = LED_RED;
     }
     break;
   default: break;
