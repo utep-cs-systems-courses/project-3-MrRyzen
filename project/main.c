@@ -31,7 +31,6 @@ void main() {
   drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
 
   P1OUT &= ~LED_GREEN;//cpu off
-  led_update();
 
   or_sr(0x18);
 }
