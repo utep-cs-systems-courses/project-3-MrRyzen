@@ -47,7 +47,7 @@ void drawState() {
     drawTriangle((width/2)-6, height/2, 6, COLOR_RED);
     break;
   }
-  P1OUT &= ~LED_GREEN;
+  toggle_led &= ~LED_GREEN;
   or_sr(0x18);
 }
 
@@ -88,6 +88,7 @@ void state_advance() {
   if(sw4_state_down) {
     reset_states();
     play_beep();
+    drawState();
   }
 
   switch (state) {
@@ -147,8 +148,8 @@ void state_advance() {
   case 4:               /* Last case or "win case" sets state to zero to start over and then plays song because you won */
     toggle_led |= LED_GREEN;
     state = 0;
-    play_song();//Song player
     writeState(stateToString(state));
+    play_song();//Song player
     drawState();
     break;
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
