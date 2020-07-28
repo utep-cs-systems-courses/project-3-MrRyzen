@@ -13,6 +13,7 @@ static char dim = 0;
 //Intializes state machine and variables
 void state_init() {
   state = 0;
+  redrawScreen = 1;
 }
 //Method resets state machine and variables back to start
 void reset_states() {
@@ -20,30 +21,6 @@ void reset_states() {
   toggle_led = 0;
   buzzer_set_period(0);
   led_update();
-}
-
-void drawState() {
-  u_char width = screenWidth, height = screenHeight;
-  clearScreen(COLOR_BLUE);
-
-  drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
-  drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
-  
-  switch (state) {
-  case 1:
-    drawTriangle((width/2)-36, height/2, 30, COLOR_GREEN);
-    break;
-  case 2:
-    drawTriangle((width/2)-36, height/2, 26, COLOR_GREEN);
-    break;
-  case 3:
-    drawTriangle((width/2)-36, height/2, 12, COLOR_GREEN);
-    break;
-  case 4:
-    drawTriangle((width/2)-36, height/2, 6, COLOR_RED);
-    break;
-  }
-  or_sr(0x18);
 }
 
 void state_advance() {
@@ -62,14 +39,14 @@ void state_advance() {
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
-      drawState();
+      redrawScreen = 1;
     }
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
     toggle_led &= ~LED_GREEN;
     if(sw2_state_down && sw3_state_down) {
       state = 3;
-      drawState();
+      redrawScreen = 1;
     }
     break;
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
@@ -82,19 +59,19 @@ void state_advance() {
     if(sw1_state_down && sw2_state_down && sw3_state_down) {
       state = 4;
       play_beep();
-      drawState();
+      redrawScreen = 1;
     }
     break;
   case 4:               /* Last case or "win case" sets state to zero to start over and then plays song because you won */
     state = 0;
     play_song();//Song player
-    drawState();
+    redrawScreen = 1;
     break;
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
     if(sw1_state_down) {
       state = 1;
       play_beep();
-      drawState();
+      redrawScreen = 1;
     }
     toggle_led = (toggle_led & LED_RED) ? LED_GREEN : LED_RED;
     break;
