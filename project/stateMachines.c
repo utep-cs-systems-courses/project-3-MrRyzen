@@ -51,12 +51,36 @@ void drawState() {
   or_sr(0x18);
 }
 
+void writeState(char *string) {
+  drawString8x12(28,24,string, COLOR_WHITE, COLOR_BLUE);
+}
+
 /*void dimmerControl() {
   dim++;
   if (dim == 4)
     return 1;
   else
     return 0;
+}*/
+
+/*char* stateToString(char state) {
+  switch(state) {
+    case 1:
+    return "STATE 1";
+    break;
+    case 2:
+    return "STATE 3";
+    break;
+    case 3:
+    return "STATE 3";
+    break;
+    case 4:
+    return "STATE 4";
+    break;
+    default:
+    return "STATE 0";
+    break;
+  }
 }*/
 
 void state_advance() {
@@ -81,6 +105,7 @@ void state_advance() {
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
+      writeState(stateToString(state));
       drawState();
     }
     break;
@@ -96,6 +121,7 @@ void state_advance() {
     }
     if(sw2_state_down && sw3_state_down) {
       state = 3;
+      writeState(stateToString(state));
       drawState();
     }
     break;
@@ -114,6 +140,7 @@ void state_advance() {
     if(sw1_state_down && sw2_state_down && sw3_state_down) {
       state = 4;
       play_beep();
+      writeState(stateToString(state));
       drawState();
     }
     break;
@@ -121,12 +148,14 @@ void state_advance() {
     P1OUT |= LED_GREEN;
     state = 0;
     play_song();//Song player
+    writeState(stateToString(state));
     drawState();
     break;
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
     P1OUT |= LED_GREEN;
     if(sw1_state_down) {
       state = 1;
+      writeState(stateToString(state));
       play_beep();
     }
     break;
