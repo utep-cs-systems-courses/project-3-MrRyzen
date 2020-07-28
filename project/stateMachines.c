@@ -6,6 +6,7 @@
 #include "switches.h"
 #include "led.h"
 #include "buzzer.h"
+#include "states.h"
 
 unsigned char toggle_led;
 //Dim variable higher = lower brightness
@@ -54,24 +55,29 @@ void drawState() {
   or_sr(0x18);
 }
 
+/*void dimmerControl() {
+  dim++;
+  dim = (dim > 4) ? 0 : dim;
+  //Led dimmer logic
+  if (dim == 0)
+    toggle_led = LED_RED;
+  else
+    toggle_led = 0;
+}*/
+
 void state_advance() {
   //Switch 4 is exit case for all states
   if(sw4_state_down) {
     reset_states();
     play_beep();
   }
-  //Dimming for case 3 only
-  dim++;
-  dim = (dim > 8) ? 0 : dim;
 
   switch (state) {
   case 1:               /* Case 1 set green led and plays beep when sw1 & sw3 are down moves case */
     P1OUT |= LED_GREEN;
     //Led dimmer logic
-    if (dim == 0)
+    if(dimmerControl())
       toggle_led = LED_RED;
-    else
-      toggle_led = 0;
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
@@ -80,11 +86,8 @@ void state_advance() {
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
     P1OUT |= LED_GREEN;
-    //Led dimmer logic
-    if (dim == 0)
+    if(dimmerControl())
       toggle_led = LED_RED;
-    else
-      toggle_led = 0;
     if(sw2_state_down && sw3_state_down) {
       state = 3;
       drawState();
@@ -93,10 +96,8 @@ void state_advance() {
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
     P1OUT |= LED_GREEN;
     //Led dimmer logic
-    if (dim == 0)
+    if(dimmerControl())
       toggle_led = LED_RED;
-    else
-      toggle_led = 0;
     //wating for next case
     if(sw1_state_down && sw2_state_down && sw3_state_down) {
       state = 4;
@@ -115,7 +116,8 @@ void state_advance() {
     if(sw1_state_down) {
       state = 1;
       play_beep();
-      drawState();
+      if(dimmerControl())
+        toggle_led = LED_RED;
     }
     break;
   default: break;
