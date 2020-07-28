@@ -34,21 +34,7 @@ void main() {
 
   enableWDTInterrupts();
 
-  or_sr(0x8);
+  or_sr(0x18);
 
   drawInit();
-  
-  while(1){
-    //clearScreen(COLOR_ORANGE);
-    while(!redrawScreen){
-      toggle_led = LED_RED;
-      led_update();
-      or_sr(0x10);
-    }
-    toggle_led = LED_GREEN;
-    led_update();
-    
-    clearScreen(COLOR_ORANGE);
-    redrawScreen = 0;
-  }
 }
