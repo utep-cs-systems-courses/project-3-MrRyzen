@@ -21,7 +21,7 @@ void reset_states() {
   toggle_led = 0;
   buzzer_set_period(0);
   led_update();
-}-     
+}
 
 void drawState() {
   u_char width = screenWidth, height = screenHeight;
