@@ -74,8 +74,10 @@ void state_advance() {
       toggle_led = LED_RED;
       dim = 0;
     }
-    else
+    else {
+      toggle_led = 0;
       dim++;
+    }
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
@@ -88,8 +90,10 @@ void state_advance() {
       toggle_led = LED_RED;
       dim = 0;
     }
-    else
+    else {
+      toggle_led = 0;
       dim++;
+    }
     if(sw2_state_down && sw3_state_down) {
       state = 3;
       drawState();
@@ -102,8 +106,10 @@ void state_advance() {
       toggle_led = LED_RED;
       dim = 0;
     }
-    else
+    else {
+      toggle_led = 0;
       dim++;
+    }
     //wating for next case
     if(sw1_state_down && sw2_state_down && sw3_state_down) {
       state = 4;
