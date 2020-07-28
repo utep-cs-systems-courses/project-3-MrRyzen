@@ -52,7 +52,7 @@ void drawState() {
 }
 
 void writeState(char *string) {
-  drawString8x12(28,24,string, COLOR_WHITE, COLOR_BLUE);
+  drawString8x12(40,44,string, COLOR_WHITE, COLOR_BLUE);
 }
 
 /*void dimmerControl() {

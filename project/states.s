@@ -31,25 +31,25 @@ stateToString:
 	CMP.B #1, R12
 	JEQ one
 	CMP.B #2, R12
-    JEQ two
+	JEQ two
 	CMP.B #3, R12
-    JEQ three
-    CMP.B #4, R12
-    JEQ four
-    jmp default
+	JEQ three
+	CMP.B #4, R12
+	JEQ four
+	jmp default
 one:
-	MOV.B #STATE1, R12
-    jmp end
+	MOV.W #STATE1, R12
+	jmp end
 two:
-	MOV.B #STATE1, R12
-    jmp end
+	MOV.W #STATE2, R12
+	jmp end
 three:
-	MOV.B #STATE1, R12
-    jmp end
+	MOV.W #STATE3, R12
+	jmp end
 four:
-	MOV.B #STATE1, R12
-    jmp end
+	MOV.W #STATE4, R12
+	jmp end
 default:
-	MOV.B #STATE0, R12
+	MOV.W #STATE0, R12
 end:
 	RET
