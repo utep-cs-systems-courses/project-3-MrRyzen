@@ -43,7 +43,7 @@ void drawState() {
     drawTriangle((width/2)-36, height/2, 6, COLOR_RED);
     break;
   }
-  or_sr(0x10);
+  or_sr(0x18);
 }
 
 void state_advance() {
