@@ -70,7 +70,7 @@ void state_advance() {
       toggle_led &= ~LED_RED;
       dim++;
     }
-    if(sw1_state_down) {
+    if(sw2_state_down) {
       state = 2;
       play_beep();
       redrawScreen = 1;
@@ -85,7 +85,7 @@ void state_advance() {
       toggle_led &= ~LED_RED;
       dim++;
     }
-    if(sw1_state_down) {
+    if(sw3_state_down) {
       state = 3;
       redrawScreen = 1;
     }
@@ -101,7 +101,7 @@ void state_advance() {
       dim++;
     }
     //wating for next case
-    if(sw1_state_down) {
+    if(sw2_state_down) {
       state = 4;
       play_beep();
       redrawScreen = 1;

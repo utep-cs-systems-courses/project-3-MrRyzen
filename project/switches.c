@@ -4,6 +4,7 @@
 #include "stateMachines.h"
 
 char sw1_state_down, sw2_state_down, sw3_state_down, sw4_state_down; /* effectively boolean */
+int redrawScreen;
 
 static char 
 switch_update_interrupt_sense()
@@ -28,8 +29,28 @@ switch_init()			/* setup switch */
 void
 switch_interrupt_handler() {
   char p2val = switch_update_interrupt_sense();
-  sw1_state_down = (p2val & SW1) ? 0 : 1; /* 0 when SW1 is up */
-  sw2_state_down = (p2val & SW2) ? 0 : 1; /* 0 when SW2 is up */
-  sw3_state_down = (p2val & SW3) ? 0 : 1; /* 0 when SW3 is up */
-  sw4_state_down = (p2val & SW4) ? 0 : 1; /* 0 when SW4 is up */
+
+   if (p2val & SW1 ? 0 : 1){ //used if p2val and SW1 is true (button 1 is pressed)
+    sw1_state_down = 1;
+    redrawScreen = 1;
+  }
+  else if (p2val & SW2 ? 0 : 1){ //used if p2val and SW2 is true (button 2 is pressed)
+    sw2_state_down = 1;
+    redrawScreen = 1;
+  }
+  else if (p2val & SW3 ? 0 : 1){ //used if p2val and SW3 is true (button 3 is pressed)
+    sw3_state_down = 1;
+    redrawScreen = 1;
+  }
+  else if (p2val & SW4 ? 0 : 1){ //used if p2val and SW4 is true (button 4 is pressed)
+    sw4_state_down = 1;
+    redrawScreen = 1;
+  }
+  else {
+    clearWindow();              //clear window after interrupt
+    sw1_state_down = 0;
+    sw2_state_down = 0;
+    sw3_state_down = 0;
+    sw4_state_down = 0;   //set state back to 0
+  }
 }
