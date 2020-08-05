@@ -53,7 +53,7 @@ void reset_states() {
 void state_advance() {
   led_update();
   //Switch 4 is exit case for all states
-  if(sw1_state_down && sw2_state_down && sw3_state_down && sw4_state_down)  {
+  if(sw2_state_down && sw3_state_down && sw4_state_down)  {
     reset_states();
     play_beep();
     redrawScreen = 1;
