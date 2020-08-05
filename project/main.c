@@ -8,6 +8,7 @@
 #include "stateMachines.h"
 
 unsigned char toggle_led, redrawScreen, state;
+unsigned char redrawscreen = 1;
 
 void main() {
   u_char width = screenWidth, height = screenHeight;

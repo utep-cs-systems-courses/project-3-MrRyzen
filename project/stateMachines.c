@@ -14,7 +14,6 @@ static char dim = 0;
 //Intializes state machine and variables
 void state_init() {
   state = 0;
-  redrawScreen = 0;
 }
 //Method resets state machine and variables back to start
 void reset_states() {
