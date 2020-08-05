@@ -6,9 +6,37 @@
 #include "switches.h"
 #include "buzzer.h"
 #include "stateMachines.h"
+#include "states.h"
 
 unsigned char toggle_led, state;
 unsigned char redrawScreen = 1;
+
+void drawState() {
+  drawString8x12(40,44,stateToString(state), COLOR_WHITE, COLOR_BLUE);
+  u_char width = screenWidth, height = screenHeight;
+  clearScreen(COLOR_BLUE);
+
+  drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
+  drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
+  
+  switch (state) {
+  case 0:
+    drawTriangle((width/2)-36, height/2, 36, COLOR_GREEN);
+    break;
+  case 1:
+    drawTriangle((width/2)-30, height/2, 30, COLOR_GREEN);
+    break;
+  case 2:
+    drawTriangle((width/2)-26, height/2, 26, COLOR_GREEN);
+    break;
+  case 3:
+    drawTriangle((width/2)-12, height/2, 12, COLOR_GREEN);
+    break;
+  case 4:
+    drawTriangle((width/2)-6, height/2, 6, COLOR_RED);
+    break;
+  }
+}
 
 void main() {
   u_char width = screenWidth, height = screenHeight;
@@ -23,13 +51,6 @@ void main() {
   state_init();
 
   enableWDTInterrupts();
-
-  clearScreen(COLOR_BLUE);
-
-  drawString8x12(16,10,"Destroy the", COLOR_WHITE, COLOR_BLUE);
-  drawString8x12(28,22,"Triangle", COLOR_WHITE, COLOR_BLUE);
-
-  drawTriangle((width/2)-36, height/2, 36, COLOR_ORANGE);
 
   or_sr(0x8);
 
