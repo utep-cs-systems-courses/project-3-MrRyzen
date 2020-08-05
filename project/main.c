@@ -7,7 +7,7 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
-unsigned char toggle_led;
+unsigned char toggle_led, redrawScreen;
 
 void main() {
   u_char width = screenWidth, height = screenHeight;
@@ -32,5 +32,15 @@ void main() {
 
   P1OUT &= ~LED_GREEN;//cpu off
 
-  or_sr(0x18);
+  or_sr(0x8);
+  
+  for(;;) { 
+    while (!redrawScreen) { /**< Pause CPU if screen doesn't need updating */
+      P1OUT &= ~GREEN_LED;    /**< Green led off witHo CPU */
+      or_sr(0x10);	      /**< CPU OFF */
+    }
+    P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
+    redrawScreen = 0;
+    movLayerDraw(&ml0, &layer0);
+  }
 }

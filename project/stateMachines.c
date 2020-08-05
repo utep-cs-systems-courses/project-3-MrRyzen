@@ -24,7 +24,7 @@ void reset_states() {
 }
 
 void drawState() {
-  and_sr(~0x10);
+  writeState(stateToString(state));
   u_char width = screenWidth, height = screenHeight;
   clearScreen(COLOR_BLUE);
 
@@ -49,7 +49,6 @@ void drawState() {
     break;
   }
   toggle_led &= ~LED_GREEN;
-  or_sr(0x18);
 }
 
 void writeState(char *string) {
@@ -89,7 +88,7 @@ void state_advance() {
   if(sw4_state_down) {
     reset_states();
     play_beep();
-    drawState();
+    redrawScreen = 1;
   }
 
   switch (state) {
@@ -107,8 +106,7 @@ void state_advance() {
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
-      writeState(stateToString(state));
-      drawState();
+      redrawScreen = 1;
     }
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
@@ -123,8 +121,7 @@ void state_advance() {
     }
     if(sw2_state_down && sw3_state_down) {
       state = 3;
-      writeState(stateToString(state));
-      drawState();
+      redrawScreen = 1;
     }
     break;
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
@@ -142,14 +139,12 @@ void state_advance() {
     if(sw1_state_down && sw2_state_down && sw3_state_down) {
       state = 4;
       play_beep();
-      writeState(stateToString(state));
-      drawState();
+      redrawScreen = 1;
     }
     break;
   case 4:               /* Last case or "win case" sets state to zero to start over and then plays song because you won */
     toggle_led |= LED_GREEN;
     state = 0;
-    writeState(stateToString(state));
     play_song();//Song player
     drawState();
     break;
@@ -157,13 +152,13 @@ void state_advance() {
     toggle_led |= LED_GREEN;
     if(sw1_state_down) {
       state = 1;
-      writeState(stateToString(state));
       play_beep();
-      drawState();
+      redrawScreen = 1;
     }
     break;
   default: break;
   }
-
   led_update();
+  if(redrawScreen)
+    and_sr(~0x10);
 }
