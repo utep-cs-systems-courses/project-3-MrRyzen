@@ -53,7 +53,6 @@ void drawState() {
     drawTriangle((width/2)-6, height/2, 6, COLOR_RED);
     break;
   }
-  toggle_led &= ~LED_GREEN;
 }
 
 /*void dimmerControl() {
@@ -96,11 +95,11 @@ void state_advance() {
   case 1:               /* Case 1 set green led and plays beep when sw1 & sw3 are down moves case */
     //Led dimmer logic
     if(dimmerControl(dim)){
-      toggle_led = LED_RED;
+      toggle_led |= LED_RED;
       dim = 0;
     }
     else {
-      toggle_led = LED_RED;
+      toggle_led &= ~LED_RED;
       dim++;
     }
     if(sw2_state_down) {
@@ -111,11 +110,11 @@ void state_advance() {
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
     if(dimmerControl(dim)){
-      toggle_led = LED_RED;
+      toggle_led |= LED_RED;
       dim = 0;
     }
     else {
-      toggle_led = 0;
+      toggle_led &= ~LED_RED;
       dim++;
     }
     if(sw3_state_down) {
@@ -126,11 +125,11 @@ void state_advance() {
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
     //Led dimmer logic
     if(dimmerControl(dim)){
-      toggle_led = LED_RED;
+      toggle_led |= LED_RED;
       dim = 0;
     }
     else {
-      toggle_led = 0;
+      toggle_led &= ~LED_RED;
       dim++;
     }
     //wating for next case
