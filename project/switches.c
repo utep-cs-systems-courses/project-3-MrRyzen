@@ -32,9 +32,4 @@ switch_interrupt_handler() {
   sw2_state_down = (p2val & SW2) ? 0 : 1; /* 0 when SW2 is up */
   sw3_state_down = (p2val & SW3) ? 0 : 1; /* 0 when SW3 is up */
   sw4_state_down = (p2val & SW4) ? 0 : 1; /* 0 when SW4 is up */
-
-  //only calls state_advance() if a switch is down
-  if(sw1_state_down || sw2_state_down || sw3_state_down || sw4_state_down) {
-    state_advance();
-  }
 }
