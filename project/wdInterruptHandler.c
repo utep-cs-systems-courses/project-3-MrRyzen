@@ -5,7 +5,7 @@
 unsigned char state;
 
 void
--__interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
+__interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
   P1OUT |= LED_GREEN;
   static char blink_count = 0;
   if (++blink_count == 125) {
