@@ -24,6 +24,7 @@ void reset_states() {
 }
 
 void drawState() {
+  and_sr(~0x10);
   u_char width = screenWidth, height = screenHeight;
   clearScreen(COLOR_BLUE);
 
