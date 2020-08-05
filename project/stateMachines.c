@@ -8,7 +8,7 @@
 #include "buzzer.h"
 #include "states.h"
 
-unsigned char toggle_led;
+unsigned char toggle_led, redrawScreen;
 //Dim variable higher = lower brightness
 static char dim = 0;
 //Intializes state machine and variables
