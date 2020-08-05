@@ -8,7 +8,8 @@
 #include "buzzer.h"
 #include "states.h"
 
-unsigned char toggle_led, redrawScreen, stateChange;
+unsigned char toggle_led, stateChange;
+int redrawScreen;
 //Dim variable higher = lower brightness
 static char dim = 0;
 //Intializes state machine and variables
@@ -19,7 +20,6 @@ void state_init() {
 void reset_states() {
   state = 0;
   toggle_led = 0;
-  buzzer_set_period(0);
 }
 
 /*void dimmerControl() {
@@ -70,7 +70,7 @@ void state_advance() {
       toggle_led &= ~LED_RED;
       dim++;
     }
-    if(sw2_state_down) {
+    if(sw1_state_down) {
       state = 2;
       play_beep();
       redrawScreen = 1;
@@ -85,7 +85,7 @@ void state_advance() {
       toggle_led &= ~LED_RED;
       dim++;
     }
-    if(sw3_state_down) {
+    if(sw1_state_down) {
       state = 3;
       redrawScreen = 1;
     }

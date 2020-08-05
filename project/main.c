@@ -9,7 +9,7 @@
 #include "states.h"
 
 unsigned char toggle_led, state;
-unsigned char redrawScreen = 1;
+int redrawScreen = 1;
 
 void drawState() {
   drawString8x12(40,44,stateToString(state), COLOR_WHITE, COLOR_BLUE);
@@ -56,12 +56,12 @@ void main() {
 
   while(1) { 
     while (!redrawScreen) { /**< Pause CPU if screen doesn't need updating */
-      P1OUT &= ~LED_GREEN;    /**< Green led off witHo CPU */
+      P1OUT |= LED_GREEN;    /**< Green led off witHo CPU */
       or_sr(0x10);	      /**< CPU OFF */
     }
     drawState();
     redrawScreen = 0;
-    P1OUT |= LED_GREEN;       /**< Green led on when CPU on */
+    P1OUT &= ~LED_GREEN;       /**< Green led on when CPU on */
   }
 }
 
