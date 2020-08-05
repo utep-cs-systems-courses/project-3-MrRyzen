@@ -47,7 +47,6 @@ switch_interrupt_handler() {
     redrawScreen = 1;
   }
   else {
-    clearWindow();              //clear window after interrupt
     sw1_state_down = 0;
     sw2_state_down = 0;
     sw3_state_down = 0;
