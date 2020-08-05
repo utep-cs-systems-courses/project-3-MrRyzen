@@ -5,9 +5,8 @@
 	.section	__interrupt_vector_11,"ax",@progbits
 	.word	WDT
 	.text
-	
 
-	.extern redrawScreen
+	
 	.extern wdt_c_handler
 WDT:
 ; start of function

@@ -100,7 +100,7 @@ void state_advance() {
       dim = 0;
     }
     else {
-      toggle_led = 0;
+      toggle_led = LED_RED;
       dim++;
     }
     if(sw1_state_down && sw3_state_down) {
