@@ -33,6 +33,4 @@ switch_interrupt_handler() {
   sw2_state_down = (p2val & SW2) ? 0 : 1; /* 0 when SW2 is up */	
   sw3_state_down = (p2val & SW3) ? 0 : 1; /* 0 when SW3 is up */
   sw4_state_down = (p2val & SW4) ? 0 : 1; /* 0 when SW4 is up */
-
-  redrawScreen = 1;
 }
