@@ -14,14 +14,13 @@ static char dim = 0;
 //Intializes state machine and variables
 void state_init() {
   state = 0;
-  redrawScreen = 1;
+  redrawScreen = 0;
 }
 //Method resets state machine and variables back to start
 void reset_states() {
   state = 0;
   toggle_led = 0;
   buzzer_set_period(0);
-  led_update();
 }
 
 void writeState(char *string) {

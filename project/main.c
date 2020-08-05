@@ -45,7 +45,6 @@ void main() {
 
 /** Watchdog timer interrupt handler. 15 interrupts/sec */
 void wdt_c_handler() {
-  P1OUT |= LED_GREEN;
   static char blink_count = 0;
   if (++blink_count == 125) {
     if (state != 3)
@@ -54,5 +53,4 @@ void wdt_c_handler() {
   }
   if (state == 3)
     state_advance();    // Calls state advance for all other cases for toggling
-  P1OUT &= ~LED_GREEN;
 }
