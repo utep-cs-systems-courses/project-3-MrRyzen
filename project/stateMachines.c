@@ -14,6 +14,7 @@ static char dim = 0;
 //Intializes state machine and variables
 void state_init() {
   state = 0;
+  redrawScreen = 1;
 }
 //Method resets state machine and variables back to start
 void reset_states() {
@@ -21,6 +22,10 @@ void reset_states() {
   toggle_led = 0;
   buzzer_set_period(0);
   led_update();
+}
+
+void writeState(char *string) {
+  drawString8x12(40,44,string, COLOR_WHITE, COLOR_BLUE);
 }
 
 void drawState() {
@@ -49,10 +54,6 @@ void drawState() {
     break;
   }
   toggle_led &= ~LED_GREEN;
-}
-
-void writeState(char *string) {
-  drawString8x12(40,44,string, COLOR_WHITE, COLOR_BLUE);
 }
 
 /*void dimmerControl() {
@@ -93,7 +94,6 @@ void state_advance() {
 
   switch (state) {
   case 1:               /* Case 1 set green led and plays beep when sw1 & sw3 are down moves case */
-    toggle_led |= LED_GREEN;
     //Led dimmer logic
     if(dimmerControl(dim)){
       toggle_led = LED_RED;
@@ -110,7 +110,6 @@ void state_advance() {
     }
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
-    toggle_led |= LED_GREEN;
     if(dimmerControl(dim)){
       toggle_led = LED_RED;
       dim = 0;
@@ -125,7 +124,6 @@ void state_advance() {
     }
     break;
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
-    toggle_led |= LED_GREEN;
     //Led dimmer logic
     if(dimmerControl(dim)){
       toggle_led = LED_RED;
@@ -143,13 +141,13 @@ void state_advance() {
     }
     break;
   case 4:               /* Last case or "win case" sets state to zero to start over and then plays song because you won */
-    toggle_led |= LED_GREEN;
+    toggle_led |= LED_RED;
     state = 0;
     play_song();//Song player
     drawState();
     break;
   case 0:               /* Base case toggles led with timer intterrupt, moves to case 1 and plays beep if sw1 is down */
-    toggle_led |= LED_GREEN;
+    toggle_led |= LED_RED;
     if(sw1_state_down) {
       state = 1;
       play_beep();
@@ -159,6 +157,4 @@ void state_advance() {
   default: break;
   }
   led_update();
-  if(redrawScreen)
-    and_sr(~0x10);
 }
