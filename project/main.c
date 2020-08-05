@@ -7,8 +7,8 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
-unsigned char toggle_led, redrawScreen, state;
-unsigned char redrawscreen = 1;
+unsigned char toggle_led, state;
+unsigned char redrawScreen = 1;
 
 void main() {
   u_char width = screenWidth, height = screenHeight;
@@ -38,8 +38,8 @@ void main() {
       P1OUT &= ~LED_GREEN;    /**< Green led off witHo CPU */
       or_sr(0x10);	      /**< CPU OFF */
     }
-    redrawScreen = 0;
     drawState();
+    redrawScreen = 0;
     P1OUT |= LED_GREEN;       /**< Green led on when CPU on */
   }
 }
