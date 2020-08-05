@@ -8,7 +8,7 @@
 #include "buzzer.h"
 #include "states.h"
 
-unsigned char toggle_led, redrawScreen;
+unsigned char toggle_led, redrawScreen, stateChange;
 //Dim variable higher = lower brightness
 static char dim = 0;
 //Intializes state machine and variables
@@ -89,7 +89,7 @@ void state_advance() {
   if(sw4_state_down) {
     reset_states();
     play_beep();
-    redrawScreen = 1;
+    stateChange = 1;
   }
 
   switch (state) {
@@ -106,7 +106,7 @@ void state_advance() {
     if(sw1_state_down && sw3_state_down) {
       state = 2;
       play_beep();
-      redrawScreen = 1;
+      stateChange = 1;
     }
     break;
   case 2:               /* case 2 sets red led and plays beep when sw2 & sw3 are down moves case */
@@ -120,7 +120,7 @@ void state_advance() {
     }
     if(sw2_state_down && sw3_state_down) {
       state = 3;
-      redrawScreen = 1;
+      stateChange = 1;
     }
     break;
   case 3:               /* Third case dims both leds and plays beep when sw1 & sw2 & sw3 are down moves case */
@@ -137,7 +137,7 @@ void state_advance() {
     if(sw1_state_down && sw2_state_down && sw3_state_down) {
       state = 4;
       play_beep();
-      redrawScreen = 1;
+      stateChange = 1;
     }
     break;
   case 4:               /* Last case or "win case" sets state to zero to start over and then plays song because you won */
@@ -151,10 +151,15 @@ void state_advance() {
     if(sw1_state_down) {
       state = 1;
       play_beep();
-      redrawScreen = 1;
+      stateChange = 1;
     }
     break;
   default: break;
   }
   led_update();
+
+  if(stateChange) {
+    stateChange = 0;
+    redrawScreen = 1;
+  }
 }
