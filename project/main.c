@@ -7,7 +7,7 @@
 #include "buzzer.h"
 #include "stateMachines.h"
 
-unsigned char toggle_led, redrawScreen;
+unsigned char toggle_led, redrawScreen, state;
 
 void main() {
   u_char width = screenWidth, height = screenHeight;
