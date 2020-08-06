@@ -87,6 +87,7 @@ void state_advance() {
     }
     if(sw1_state_down) {
       state = 3;
+      play_beep();
       redrawScreen = 1;
     }
     break;
